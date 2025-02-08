@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .login-container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .login-header img {
+            width: 100%;
+            border-radius: 10px 10px 0 0;
+        }
+        .btn-gradient {
+            background: linear-gradient(to right, #1aeacb, #4571ff);
+            color: white;
+            box-shadow:0px 8px 26px 0px rgba(46,115,255,0.1);
+        }
+    </style>
+<?php session_start(); ?>
+<?php if(isset($_SESSION["error"])): ?>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: '<?php echo $_SESSION["error"]; ?>',
+            background: 'rgba(0, 0, 0, 0.8)',
+            color: '#fff',
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000
+        });
+    </script>
+    <?php unset($_SESSION["error"]); ?>
+<?php endif; ?>
+</head>
+<body>
+
+    <div class="container mt-4">
+        <div class="login-container">
+            <div class="login-header">
+                <img src="futbol.jpg" alt="Fútbol">
+            </div>
+            <h3 class="fw-bold">INICIAR SESIÓN</h3>
+            <p><a href="#">or Crear</a></p>
+            <form action="guardar_datos.php" method="post">
+                <div class="mb-3">
+                    <label class="form-label">Usuario</label>
+                    <input type="text" class="form-control" name="usuario" placeholder="Ingrese su usuario" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" name="contrasena" placeholder="Ingrese su contraseña" required>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="rememberMe">
+                    <label class="form-check-label" for="rememberMe">Acuérdate de mí</label>
+                </div>
+                <button type="submit" class="btn btn-gradient w-100 mt-3">Acceso</button>
+            </form>
+            <p class="mt-3"><a href="#">Servicio al Cliente</a></p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
